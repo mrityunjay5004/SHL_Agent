@@ -24,7 +24,8 @@ texts = [
 
 embeddings = model.encode(
     texts,
-    convert_to_numpy=True
+    convert_to_numpy=True,
+    normalize_embeddings=True
 )
 
 np.save(

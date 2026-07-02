@@ -7,7 +7,7 @@ embeddings = np.load(
 
 dimension = embeddings.shape[1]
 
-index = faiss.IndexFlatL2(
+index = faiss.IndexFlatIP(
     dimension
 )
 
