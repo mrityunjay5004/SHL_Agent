@@ -1,19 +1,31 @@
 # SHL Assessment Recommendation Agent
 
-An AI-powered conversational recommendation system that helps recruiters identify the most relevant SHL assessments based on hiring requirements. The system combines semantic search, rule-based ranking, and Gemini-powered response generation to deliver accurate, contextual, and grounded recommendations.
+An AI-powered conversational recommendation system that helps recruiters identify the most relevant SHL assessments using semantic retrieval, hybrid ranking, and Gemini-powered reasoning. The system supports conversational recommendations, clarification questions, assessment comparisons, and grounded responses through a FastAPI REST API.
+
+---
+
+## 🚀 Live Deployment
+
+| Resource | Link |
+|----------|------|
+| **Live API** | https://shl-agent-fw8x.onrender.com |
+| **Swagger Docs** | https://shl-agent-fw8x.onrender.com/docs |
+| **Health Endpoint** | https://shl-agent-fw8x.onrender.com/health |
+| **Chat Endpoint** | POST https://shl-agent-fw8x.onrender.com/chat |
+| **GitHub Repository** | https://github.com/mrityunjay5004/SHL_Agent |
 
 ---
 
 ## Features
 
-- Semantic retrieval using Sentence Transformers + FAISS
-- Hybrid reranking based on role, skills, seniority, and assessment type
-- Multi-turn conversational recommendation flow
-- Intelligent clarification for incomplete hiring requirements
+- Semantic Retrieval using Sentence Transformers + FAISS
+- Hybrid Ranking based on role, skills, seniority and assessment type
+- Conversational multi-turn recommendation flow
+- Intelligent clarification for incomplete recruiter queries
 - Assessment comparison (e.g., OPQ vs DSI)
-- Guardrails for off-topic and competitor requests
-- Grounded LLM responses using Gemini
-- FastAPI REST API with OpenAPI documentation
+- Guardrails against off-topic and competitor requests
+- Grounded LLM responses using Google Gemini
+- FastAPI REST API with Swagger/OpenAPI documentation
 - Automated evaluation pipeline
 
 ---
@@ -24,7 +36,7 @@ An AI-powered conversational recommendation system that helps recruiters identif
 - FastAPI
 - Sentence Transformers
 - FAISS
-- Google Gemini API
+- Google Gemini
 - NumPy
 - Scikit-learn
 
@@ -32,7 +44,7 @@ An AI-powered conversational recommendation system that helps recruiters identif
 
 ## Project Structure
 
-```
+```text
 SHL_Agent/
 │
 ├── app/
@@ -49,13 +61,14 @@ SHL_Agent/
 │   ├── embeddings.npy
 │   └── faiss_index/
 │
+├── evaluation/
+│   └── eval.py
+│
 ├── scripts/
 │   ├── create_embeddings.py
 │   ├── create_faiss_index.py
-│   └── create_metadata.py
-│
-├── evaluation/
-│   └── eval.py
+│   ├── create_metadata.py
+│   └── parse_traces.py
 │
 ├── run.py
 ├── requirements.txt
@@ -76,7 +89,8 @@ Guardrails
 State Extraction
       │
       ▼
-Retriever (Sentence Transformers + FAISS)
+Semantic Retrieval
+(FAISS + Sentence Transformers)
       │
       ▼
 Hybrid Ranker
@@ -99,13 +113,11 @@ git clone https://github.com/mrityunjay5004/SHL_Agent.git
 cd SHL_Agent
 ```
 
-Create a virtual environment
+Create virtual environment
 
 ```bash
 python -m venv venv
 ```
-
-Activate the environment
 
 Windows
 
@@ -113,7 +125,7 @@ Windows
 venv\Scripts\activate
 ```
 
-Linux / macOS
+Linux/macOS
 
 ```bash
 source venv/bin/activate
@@ -137,7 +149,7 @@ GEMINI_API_KEY=YOUR_API_KEY
 
 ---
 
-## Build Embeddings
+## Build Retrieval Index
 
 ```bash
 python scripts/create_embeddings.py
@@ -146,19 +158,19 @@ python scripts/create_faiss_index.py
 
 ---
 
-## Run the Server
+## Run Locally
 
 ```bash
 python run.py
 ```
 
-Server runs on
+Application:
 
 ```
 http://localhost:8000
 ```
 
-Swagger UI
+Swagger:
 
 ```
 http://localhost:8000/docs
@@ -166,7 +178,21 @@ http://localhost:8000/docs
 
 ---
 
-## Example Request
+## API Endpoints
+
+### Health
+
+```http
+GET /health
+```
+
+### Chat
+
+```http
+POST /chat
+```
+
+Example request
 
 ```json
 {
@@ -179,9 +205,7 @@ http://localhost:8000/docs
 }
 ```
 
----
-
-## Example Response
+Example response
 
 ```json
 {
@@ -206,8 +230,8 @@ http://localhost:8000/docs
 - Clarification Questions
 - Semantic Retrieval
 - Multi-turn Conversations
-- Guardrail Enforcement
 - Context-Aware Ranking
+- Guardrail Enforcement
 
 ---
 
@@ -216,11 +240,13 @@ http://localhost:8000/docs
 The evaluation pipeline measures:
 
 - Recommendation Quality
+- Retrieval Accuracy
 - Recall@10
+- Response Groundedness
 - Schema Validation
-- Latency
 - Guardrail Behaviour
 - Comparison Accuracy
+- Latency
 
 Run evaluation
 
@@ -232,12 +258,11 @@ python evaluation/eval.py
 
 ## Future Improvements
 
-- Hybrid BM25 + FAISS retrieval
-- Cross-encoder reranking
-- Streaming responses
-- Docker deployment
-- CI/CD integration
-- Expanded evaluation benchmarks
+- Hybrid BM25 + FAISS Retrieval
+- Cross-Encoder Re-ranking
+- Streaming Responses
+- CI/CD Pipeline
+- Expanded Evaluation Benchmarks
 
 ---
 
@@ -252,4 +277,4 @@ python evaluation/eval.py
 
 ## License
 
-This project was developed as part of the SHL AI Assessment Recommendation assignment and is intended for educational and demonstration purposes.
+This project was developed as part of the SHL Research Intern Assignment and is intended solely for educational and demonstration purposes.
